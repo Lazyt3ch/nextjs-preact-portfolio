@@ -23,11 +23,15 @@ export async function getServerSideProps() {
 
     const text = await res.text();
 
+    const fragmentStart = text.indexOf("<dl ");
+    const fragmentEnd = text.indexOf("</dl>", fragmentStart + 4);
+    const fragment = text.slice(fragmentStart, fragmentEnd + 5);
+
     return ({
-      props: { body: text }
+      props: { body: fragment }
     })
   } catch(err) {
-    alert(err);
+    console.log(err);
     return ({ 
       props: { body: "" }   
     });
