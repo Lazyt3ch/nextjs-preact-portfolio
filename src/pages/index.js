@@ -34,36 +34,37 @@ export default function Home(props) {
     <>
       <Head />
 
-      <h1>DEBUG</h1>
-      <div>
-        {items.map((item, idx) => {
-            <div>{item.title} -- {idx}</div>
-          })
-        }
-      </div>
+      {/* <h1>DEBUG</h1>
+      <div className="debug-container">
 
-      {/* <h1 className="align-center">Образцы работ фрилансера Lazytech</h1>
+        { items.length }
+        { items.map((item) => 
+            <div>{item.title}</div>
+          )
+        }
+      </div> */}
+
+      <h1 className="align-center">Образцы работ фрилансера Lazytech</h1>
       <div className={styles.container}>
         { isNotEmptyArray(items)
           ? items.map((item, idx) =>
-            { isNotEmptyString(item.href) &&
-              <div key={item.id && item.id.length ? item.id : (-idx).toString()}>
-                <a href={ `${baseUrl}${item.href}` } target="_blank">
-                  <div>{
-                    isNotEmptyString(item.title) 
-                      ? item.title 
-                      : "Project title not found :("
-                  }</div>
-                  { isNotEmptyString(item.imgSrc)
-                    ? <img src={item.imgSrc} alt={item.title} />
-                    : <div>Preview Image not found :(</div>
-                  }              
-                </a>
-              </div>
-            })
-          : "No projects found :("
+            <div key={item.id && item.id.length ? item.id : (-idx).toString()}>
+              <a href={ `${baseUrl}${item.href}` } target="_blank">
+                <div>{
+                  isNotEmptyString(item.title) 
+                    ? item.title 
+                    : "Project title not found :("
+                }</div>
+                { isNotEmptyString(item.imgSrc)
+                  ? <img src={item.imgSrc} alt={item.title} />
+                  : <div>Preview Image not found :(</div>
+                }              
+              </a>
+            </div>
+            )
+          : <div>"No projects found :("</div>
         }
-      </div> */}
+      </div>
     </>
   )
 }
@@ -73,18 +74,18 @@ export async function getServerSideProps() {
   try {
 
     // 2debug
-    return ({ props: {
-      items:
-        [
-          {
-            href: "/projects/226637",
-            id: "226637",
-            imgSrc: "https://habrastorage.org/getpro/freelansim/allfiles/75/758/758673/preview_d29a6d5616.png",
-            title: "Мокап-проект, сделанный на React по готовым макетам (Figma)",
-          },
-        ] 
-      }
-    });
+    // return ({ props: {
+    //   items:
+    //     [
+    //       {
+    //         href: "/projects/226637",
+    //         id: "226637",
+    //         imgSrc: "https://habrastorage.org/getpro/freelansim/allfiles/75/758/758673/preview_d29a6d5616.png",
+    //         title: "Мокап-проект, сделанный на React по готовым макетам (Figma)",
+    //       },
+    //     ] 
+    //   }
+    // });
 
     const res = await fetch(
       `${baseUrl}/freelancers/Lazytech/projects`, 
