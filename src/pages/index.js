@@ -44,7 +44,14 @@ export default function Home(props) {
         }
       </div> */}
 
-      <h1 className={styles.pageTitle}>Образцы работ фрилансера Lazytech</h1>
+      <h1 className={styles.pageTitle}>
+        Образцы работ фрилансера <a 
+            href="https://freelance.habr.com/freelancers/Lazytech"
+            className="externalLink"
+          >
+            Lazytech
+          </a>
+      </h1>
       <div className={styles.container}>
         { isNotEmptyArray(items)
           ? items.map((item, idx) =>

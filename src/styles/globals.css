@@ -17,3 +17,12 @@ a {
   padding: 0;
   box-sizing: border-box;
 }
+
+.externalLink {
+  color: black;
+}
+
+.externalLink:hover {
+  text-decoration: underline;
+  color: blue;
+}

@@ -10,7 +10,7 @@
 
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem 1rem;
 
   display: flex;
   flex-direction: column;
@@ -37,7 +37,11 @@
 
   font-weight: 500;
   font-size: 1.4rem;
+}
 
+.flexItemTitle:hover {
+  color: blue;
+  text-decoration: underline;
 }
 
 .imageLink {
@@ -50,7 +54,12 @@
 .imageContainer {
   padding: 1rem;
 
-  border: 2px dashed darkslategray;
+  border: 2px solid darkslategray;
+}
+
+.imageContainer:hover {
+  /* transform: translateY(-.4rem); */
+  border: 2px dashed blue;
 }
 
 @media screen and (max-width: 800px) {
