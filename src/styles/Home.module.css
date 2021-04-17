@@ -1,6 +1,7 @@
 .pageTitle {
   text-align: center;
-  margin: 1rem;
+  /* margin: 1rem; */
+  margin: 1rem 1rem .2rem 1rem;
 
   font-size: 2rem;
   font-weight: 600;
@@ -29,9 +30,13 @@
 }
 
 .flexItemTitle {
+  display: block;
+  margin-bottom: .6rem;
+
   color: darkslategray;  
 
   font-weight: 500;
+  font-size: 1.4rem;
 
 }
 
@@ -40,5 +45,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;  
+}
+
+.imageContainer {
+  padding: 1rem;
+
+  border: 2px dashed darkslategray;
+}
+
+@media screen and (max-width: 800px) {
+  .pageTitle {
+    font-size: 1.4rem;
+  }
+
+  .flexItemTitle {
+    font-size: 1rem;
+  }  
 }
 

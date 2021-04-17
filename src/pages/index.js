@@ -59,10 +59,12 @@ export default function Home(props) {
                     ? item.title 
                     : "Project title not found :("
                 }</h2>
-                { isNotEmptyString(item.imgSrc)
-                  ? <img src={item.imgSrc} alt={item.title} />
-                  : <div>Preview Image not found :(</div>
-                }              
+                <div className={styles.imageContainer}>
+                  { isNotEmptyString(item.imgSrc)
+                    ? <img src={item.imgSrc} alt={item.title} />
+                    : <div>Preview Image not found :(</div>
+                  }              
+                </div>
               </a>
             </div>
             )
