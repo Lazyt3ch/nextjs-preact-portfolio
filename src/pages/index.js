@@ -45,7 +45,7 @@ export default function Home(props) {
       </div> */}
 
       <h1 className={styles.pageTitle}>
-        Образцы работ фрилансера <a 
+        Образцы работ веб-разработчика <a 
             href="https://freelance.habr.com/freelancers/Lazytech"
             className="externalLink"
           >
@@ -66,9 +66,20 @@ export default function Home(props) {
                     ? item.title 
                     : "Project title not found :("
                 }</h2>
-                <div className={styles.imageContainer}>
+                <div className={styles.imageContainer}
+                  // style={ 
+                  //   isNotEmptyString(item.imgSrc)
+                  //   ? {
+                  //       backgroundImage: `url(${item.imgSrc})`,
+                  //       backgroundRepeat: 'no-repeat',
+                  //       backgroundSize: 'cover',
+                  //     }
+                  //   : null
+                  // }
+                >
                   { isNotEmptyString(item.imgSrc)
                     ? <img src={item.imgSrc} alt={item.title} />
+                    // ? null
                     : <div>Preview Image not found :(</div>
                   }              
                 </div>

@@ -52,14 +52,19 @@
 }
 
 .imageContainer {
-  padding: 1rem;
+  /* padding: 1rem; */
+  /* width: 40rem; */
+  max-width: 100vw;
+  
+  /* height: 30rem; */
 
   border: 2px solid darkslategray;
 }
 
 .imageContainer:hover {
   /* transform: translateY(-.4rem); */
-  border: 2px dashed blue;
+  border: 2px solid blue;
+  opacity: .8;
 }
 
 @media screen and (max-width: 800px) {
@@ -72,3 +77,12 @@
   }  
 }
 
+@media screen and (max-width: 400px) {
+  .pageTitle {
+    font-size: 1rem;
+  }
+
+  .flexItemTitle {
+    font-size: .8rem;
+  }  
+}
