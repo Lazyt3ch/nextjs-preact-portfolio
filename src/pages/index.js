@@ -44,17 +44,21 @@ export default function Home(props) {
         }
       </div> */}
 
-      <h1 className="align-center">Образцы работ фрилансера Lazytech</h1>
+      <h1 className={styles.pageTitle}>Образцы работ фрилансера Lazytech</h1>
       <div className={styles.container}>
         { isNotEmptyArray(items)
           ? items.map((item, idx) =>
-            <div key={item.id && item.id.length ? item.id : (-idx).toString()}>
-              <a href={ `${baseUrl}${item.href}` } target="_blank">
-                <div>{
+            <div className={styles.flexItem}
+              key={item.id && item.id.length ? item.id : (-idx).toString()}
+            >
+              <a href={ `${baseUrl}${item.href}` } target="_blank"
+                className={styles.imageLink}
+              >
+                <h2 className={styles.flexItemTitle}>{
                   isNotEmptyString(item.title) 
                     ? item.title 
                     : "Project title not found :("
-                }</div>
+                }</h2>
                 { isNotEmptyString(item.imgSrc)
                   ? <img src={item.imgSrc} alt={item.title} />
                   : <div>Preview Image not found :(</div>
