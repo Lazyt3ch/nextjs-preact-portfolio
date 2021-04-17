@@ -2,22 +2,48 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 const { JSDOM } = require('jsdom');
 
-const baseUrlSlash = "https://freelance.habr.com/";
+const baseUrl = "https://freelance.habr.com";
+
+const isNotEmptyString = (str) => {
+  if (typeof str !== 'string') return false;
+  return (str.length > 0);
+};
 
 export default function Home({ items }) {
+  console.log(items);
+  console.log(items[0].href);
+  console.log(items[0].href.length);
+  console.log(`${baseUrl}${items[0].href}`);
+
   return (
     <>
       <Head />
+      <h1>DEBUG</h1>
+      <div>{items.map((item, idx) => {
+        <div>{item.title} -- {idx}</div>
+      })}
+      </div>
       <h1 className="align-center">Образцы работ фрилансера Lazytech</h1>
       <div className={styles.container}>
-        { items.map((item) =>
-          <div key={item.id}>
-            <a href={item.href} target="_blank">
-              <div>{item.title}</div>
-              <img src={item.previewImgSrc} alt={item.title} />
-            </a>
-          </div>
-        ) }
+        { items && items.length
+          ? items.map((item, idx) =>
+            { isNotEmptyString(item.href) &&
+              <div key={item.id && item.id.length ? item.id : (-idx).toString()}>
+                <a href={ `${baseUrl}${item.href}` } target="_blank">
+                  <div>{
+                    isNotEmptyString(item.title) 
+                      ? item.title 
+                      : "Project title not found :("
+                  }</div>
+                  { isNotEmptyString(item.imgSrc)
+                    ? <img src={item.imgSrc} alt={item.title} />
+                    : <div>Preview Image not found :(</div>
+                  }              
+                </a>
+              </div>
+            })
+          : "No projects found :("
+        }
       </div>
     </>
   )
@@ -26,7 +52,7 @@ export default function Home({ items }) {
 export async function getServerSideProps() {
   try {
     const res = await fetch(
-      `${baseUrlSlash}freelancers/Lazytech/projects`, 
+      `${baseUrl}/freelancers/Lazytech/projects`, 
       { 
         method: "GET",
         headers: {
@@ -37,26 +63,27 @@ export async function getServerSideProps() {
 
     const text = await res.text();
 
-    const fragmentStart = text.indexOf("<dl ");
-    const fragmentEnd = text.indexOf("</dl>", fragmentStart + 4);
-    const fragment = text.slice(fragmentStart, fragmentEnd + 5);
+    const start = text.indexOf("<dl ");
+    const end = text.indexOf("</dl>", start + 4);
+    const fragment = text.slice(start, end + 5);
 
     const dom = new JSDOM(fragment);
     const document = dom.window.document;
 
-    const projectNodes = document.querySelectorAll(".project_item");
-    const projectItems = Array.from(projectNodes).map((item, idx) => ({
+    const nodes = document.querySelectorAll(".project_item");
+
+    const items = Array.from(nodes).map((item, idx) => ({
         title: item.title,
         href: item.href,
         id: item.dataset.id,
-        previewImgSrc: projectNodes[idx].querySelector(".thumb img").src,
+        imgSrc: nodes[idx].querySelector(".thumb img").src,
       })
     );
 
     // console.log(projectItems);
 
     return ({
-      props: { items: projectItems }
+      props: { items }
     })
   } catch(err) {
     console.log(err);
