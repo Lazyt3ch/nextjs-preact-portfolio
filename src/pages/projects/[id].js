@@ -54,6 +54,12 @@ export default function Project({info}) {
           </div>
         }
 
+        { images && isNotEmptyArray(images) && 
+          images.map((src) => 
+            <img src={src} alt="title" width="80%" />
+          )
+        }
+
       </div>
 
 
