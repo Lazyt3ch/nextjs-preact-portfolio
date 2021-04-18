@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Project.module.css'
+import styles from '../../styles/Project.module.css';
 
 import { useRouter } from 'next/router';
 const { JSDOM } = require('jsdom');
