@@ -8,12 +8,11 @@ const { JSDOM } = require('jsdom');
 // https://freelance.habr.com/projects/221255
 const baseUrl = "https://freelance.habr.com";
 
-export default function Project() {
+export default function Project(props) {
   const router = useRouter();
   const { id } = router.query;
 
   return (
-
     <>
       <Head />
 
@@ -26,12 +25,16 @@ export default function Project() {
 
     </>
   );
-
-
 }
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  console.log("PROJECTS: getServerSideProps");
+  // console.log("context", context);
+
+  const { id } = context.query;
+  console.log("getServerSideProps:  id", id);
+
   const info = {};
 
   try {
