@@ -16,33 +16,13 @@ const isNotEmptyArray = (arr) => {
 }
 
 export default function Home(props) {
-  // console.log(props);
   const { items } = props;
-  // console.log("Home: items, items[0]", items[0]);
-
-  // if (isNotEmptyArray(items)) {
-  //   console.log(items[0].href);
-  //   console.log(items[0].href.length);
-  //   console.log(`${baseUrl}${items[0].href}`);
-  //   console.log(Array.isArray(items));
-  //   console.log(items.length); 
-  // }
 
   console.log("Home: rendering data...");
 
   return (
     <>
       <Head />
-
-      {/* <h1>DEBUG</h1>
-      <div className="debug-container">
-
-        { items.length }
-        { items.map((item) => 
-            <div>{item.title}</div>
-          )
-        }
-      </div> */}
 
       <h1 className={styles.pageTitle}>
         Образцы работ веб-разработчика <a 
@@ -93,23 +73,8 @@ export default function Home(props) {
   )
 }
 
-// export async function getStaticProps() {
 export async function getServerSideProps() {
   try {
-
-    // 2debug
-    // return ({ props: {
-    //   items:
-    //     [
-    //       {
-    //         href: "/projects/226637",
-    //         id: "226637",
-    //         imgSrc: "https://habrastorage.org/getpro/freelansim/allfiles/75/758/758673/preview_d29a6d5616.png",
-    //         title: "Мокап-проект, сделанный на React по готовым макетам (Figma)",
-    //       },
-    //     ] 
-    //   }
-    // });
 
     const res = await fetch(
       `${baseUrl}/freelancers/Lazytech/projects`, 
