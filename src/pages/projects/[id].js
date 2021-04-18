@@ -14,7 +14,7 @@ export default function Project({info}) {
   const router = useRouter();
   const { id } = router.query;
   
-  console.log("info", info);
+  // console.log("info", info);
 
   const { title, description, images } = info;
   
@@ -22,11 +22,11 @@ export default function Project({info}) {
     <>
       <Head />
 
-      <div>
+      {/* <div>
         DEBUG
         <br />
         Post: {id}
-      </div>
+      </div> */}
 
       <div>
         <h1>{ title }</h1>
@@ -155,23 +155,23 @@ export async function getServerSideProps(context) {
     // Add <br> after <a ...> located at 0th position
     if (description[0] && description[0].type === 'url' 
         && description[1] && description[1].type !== 'br') {
-      description = description.splice(1, 0, brObj);
+      description.splice(1, 0, brObj);
     }
 
     // Remove <br> that immediately precedes <a ...>
-    // if (description.length > 3) {
-    //   for (let i = description.length - 2; i > 1; i--) {
-    //     console.log(description[i], description[i].type);
-    //     if (description[i].type === 'br' 
-    //       && description[i + 1].type === 'url'
-    //       && description[i - 1].type === 'text'
-    //       ) {
-    //       description = description.splice(i, 1);
-    //     }
-    //   }  
-    // }
+    if (description.length > 3) {
+      for (let i = description.length - 2; i > 1; i--) {
+        console.log(i, description[i], description[i].type);
+        if (description[i].type === 'br' 
+          && (description.length >= i && description[i + 1].type === 'url')
+          && description[i - 1].type === 'text'
+          ) {
+          description.splice(i, 1);
+        }
+      }  
+    }
 
-    console.log("description =", description);
+    // console.log("description =", description);
     info.description = description;
 
     // description.forEach((child) => {
@@ -180,7 +180,7 @@ export async function getServerSideProps(context) {
 
     const imageNodes = await document.querySelectorAll("div.images > img");
     const images = Array.from(imageNodes).map((node) => node.src);
-    console.log("images", images);
+    // console.log("images", images);
     info.images = images;
   } 
   catch(err) {
