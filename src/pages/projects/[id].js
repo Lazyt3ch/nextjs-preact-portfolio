@@ -178,30 +178,30 @@ export async function getServerSideProps(context) {
     // });
 
     const imageNodes = await document.querySelectorAll("div.images > img");
-    const images = await Array.from(imageNodes).map((node) => {
+
+    const imageItems = Array.from(imageNodes);
+
+    const imagePromises = imageItems.map(async (node) => {
       const src = node.src;
 
       // Default image size
-      let height = 300;
-      let width = 400;
+      let height = 800;
+      let width = 1000;
 
-      // Get image width and height...
+      // Get image width and height
       const imageInfo = await probe(src);
 
-      if (imageInfo.height) {
-        height = imageInfo.height;
-      }
-
-      if (imageInfo.width) {
-        width = imageInfo.width;
-      }
+      height = imageInfo.height || height;
+      width = imageInfo.width || width;
 
       return {
         src,
         height,
         width,
-      }
+      };
     });
+
+    const images = await Promise.all(imagePromises);
     
     console.log("images", images);
     info.images = images;
