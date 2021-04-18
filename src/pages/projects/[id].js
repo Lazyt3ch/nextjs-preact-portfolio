@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Project.module.css';
 
 import { useRouter } from 'next/router';
-const { JSDOM } = require('jsdom');
+// const { JSDOM } = require('jsdom');
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 const baseUrl = "https://freelance.habr.com";

@@ -2,19 +2,10 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 const { JSDOM } = require('jsdom');
 import Link from "next/link";
+import {isNotEmptyArray, isNotEmptyString} from "../utils/checkers";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 const baseUrl = "https://freelance.habr.com";
-
-const isNotEmptyString = (str) => {
-  if (typeof str !== 'string') return false;
-  return (str.length > 0);
-};
-
-const isNotEmptyArray = (arr) => {
-  if (!Array.isArray(arr)) return false;
-  return (arr.length > 0);
-}
 
 export default function Home(props) {
   const { items } = props;
