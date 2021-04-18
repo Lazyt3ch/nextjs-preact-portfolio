@@ -60,9 +60,12 @@ export default function Project({info}) {
         }
 
         { images && isNotEmptyArray(images) && 
-          images.map((src) => 
+          images.map(({src}) => 
             <div className={styles.imageContainer}>
-              <img src={src} alt="title" width="80%" />
+              <img src={src} alt="title" 
+                className={styles.image}
+                width="1000" height="800"
+              />
             </div>
           )
         }
@@ -173,7 +176,12 @@ export async function getServerSideProps(context) {
     // });
 
     const imageNodes = await document.querySelectorAll("div.images > img");
-    const images = Array.from(imageNodes).map((node) => node.src);
+    const images = Array.from(imageNodes).map((node) => {
+      // Get image width and height...
+      return {
+        src: node.src,
+      }
+    });
     // console.log("images", images);
     info.images = images;
   } 

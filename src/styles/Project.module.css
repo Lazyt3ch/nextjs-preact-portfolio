@@ -41,6 +41,11 @@
   border: 2px solid darkslategray;
 }
 
+.image {
+  height: auto;
+  width: 100%;
+}
+
 @media screen and (max-width: 800px) {
   .pageTitle {
     font-size: 1.25rem;
