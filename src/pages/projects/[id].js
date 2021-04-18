@@ -28,11 +28,16 @@ export default function Project({info}) {
         Post: {id}
       </div> */}
 
-      <div>
-        <h1>{ title }</h1>
+      <h1 className={styles.pageTitle}>{ title }</h1>
+
+      <div className={styles.container}>        
 
         { description && isNotEmptyArray(description) && 
-          <div>
+          <div className={styles.description}>
+            { description[0].type === 'url' &&
+              <div>Работающее веб-приложение:</div>
+            }
+
             {
               description.map(({type, content}, idx) => 
                 type === 'text'
@@ -56,7 +61,9 @@ export default function Project({info}) {
 
         { images && isNotEmptyArray(images) && 
           images.map((src) => 
-            <img src={src} alt="title" width="80%" />
+            <div className={styles.imageContainer}>
+              <img src={src} alt="title" width="80%" />
+            </div>
           )
         }
 
@@ -140,7 +147,7 @@ export async function getServerSideProps(context) {
 
     if (description.length > 3) {
       for (let i = description.length - 2; i > 1; i--) {
-        console.log(i, description[i], description[i].type);
+        // console.log(i, description[i], description[i].type);
         
         if (description[i].type === 'br' 
           && (description.length >= i && description[i + 1].type === 'url')
