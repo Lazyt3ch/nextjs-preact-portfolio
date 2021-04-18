@@ -103,17 +103,6 @@ export async function getServerSideProps(context) {
     const title = await document.querySelector("h1.name").textContent;
     info.title = title;
 
-    // const description = await document.querySelector("div.description").textContent;
-    // console.log("description =", description);
-    // info.description = description;
-
-    // const descriptionNodes = await document.querySelectorAll("div.description *");
-    // // console.log("descriptionNodes =", descriptionNodes);
-    // const descriptionItems = Array.from(descriptionNodes);
-    // console.log("descriptionItems =", descriptionItems);
-    
-
-
     const brObj = {
       type: 'br',
       content: null,
@@ -121,21 +110,6 @@ export async function getServerSideProps(context) {
 
     const descriptionNode = await document.querySelector("div.description");
     let description = Array.from(descriptionNode.childNodes)
-      // .filter((child) => {
-      //   if (child.nodeType === 3) { // Node.TEXT_NODE
-      //     return true;
-      //   }
-
-      //   if (child.tagName === "A") {
-      //     return true;
-      //   }
-
-      //   if (child.tagName === "BR") {
-      //     return true;
-      //   }        
-
-      //   return false;          
-      // })
       .map((child) => {
         if (child.nodeType === 3) { // Node.TEXT_NODE
           return ({
@@ -159,21 +133,28 @@ export async function getServerSideProps(context) {
       });
 
     // Add <br> after <a ...> located at 0th position
-    if (description[0] && description[0].type === 'url' 
-        && description[1] && description[1].type !== 'br') {
-      description.splice(1, 0, brObj);
-    }
+    // if (description[0] && description[0].type === 'url' 
+    //     && description[1] && description[1].type !== 'br') {
+    //   description.splice(1, 0, brObj);
+    // }
 
-    // Remove <br> that immediately precedes <a ...>
     if (description.length > 3) {
       for (let i = description.length - 2; i > 1; i--) {
         console.log(i, description[i], description[i].type);
+        
         if (description[i].type === 'br' 
           && (description.length >= i && description[i + 1].type === 'url')
           && description[i - 1].type === 'text'
-          ) {
+          ) { // Remove <br> that immediately precedes <a ...> and immediately follows TEXT
           description.splice(i, 1);
-        }
+          continue;
+        } 
+        
+        if (description[i].type === 'br'  
+          && (description.length >= i && description[i + 1].type === 'br')) {
+            // Remove <br> that precedes another <br>
+            description.splice(i, 1);      
+        }  
       }  
     }
 
