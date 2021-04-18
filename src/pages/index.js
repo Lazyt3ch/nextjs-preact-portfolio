@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 const { JSDOM } = require('jsdom');
+import Link from "next/link";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 const baseUrl = "https://freelance.habr.com";
@@ -38,32 +39,26 @@ export default function Home(props) {
             <div className={styles.flexItem}
               key={item.id && item.id.length ? item.id : (-idx).toString()}
             >
-              <a href={ `${baseUrl}${item.href}` } target="_blank"
-                className={styles.imageLink}
-              >
-                <h2 className={styles.flexItemTitle}>{
-                  isNotEmptyString(item.title) 
-                    ? item.title 
-                    : "Project title not found :("
-                }</h2>
-                <div className={styles.imageContainer}
-                  // style={ 
-                  //   isNotEmptyString(item.imgSrc)
-                  //   ? {
-                  //       backgroundImage: `url(${item.imgSrc})`,
-                  //       backgroundRepeat: 'no-repeat',
-                  //       backgroundSize: 'cover',
-                  //     }
-                  //   : null
-                  // }
+              {/* <Link href={ `${baseUrl}${item.href}` } target="_blank"> */}
+              <Link href={ `/projects/${item.id}` } target="_blank">
+                <a 
+                  className={styles.imageLink}
                 >
-                  { isNotEmptyString(item.imgSrc)
-                    ? <img src={item.imgSrc} alt={item.title} />
-                    // ? null
-                    : <div>Preview Image not found :(</div>
-                  }              
-                </div>
-              </a>
+                  <h2 className={styles.flexItemTitle}>{
+                    isNotEmptyString(item.title) 
+                      ? item.title 
+                      : "Project title not found :("
+                  }</h2>
+                  <div className={styles.imageContainer}
+                  >
+                    { isNotEmptyString(item.imgSrc)
+                      ? <img src={item.imgSrc} alt={item.title} />
+                      // ? null
+                      : <div>Preview Image not found :(</div>
+                    }              
+                  </div>
+                </a>
+              </Link>
             </div>
             )
           : <div>"No projects found :("</div>
