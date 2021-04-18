@@ -68,6 +68,7 @@ export default function Project({info}) {
               <img src={src} alt="title" 
                 className={styles.image}
                 width={width} height={height}
+                loading="lazy"
               />
             </div>
           )
