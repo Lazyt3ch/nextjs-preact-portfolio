@@ -63,7 +63,6 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   try {
-
     const res = await fetch(
       `${baseUrl}/freelancers/Lazytech/projects`, 
       { 
