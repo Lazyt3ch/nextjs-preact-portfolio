@@ -18,7 +18,7 @@ const isNotEmptyArray = (arr) => {
 export default function Home(props) {
   // console.log(props);
   const { items } = props;
-  console.log("Home: items, items[0]", items[0]);
+  // console.log("Home: items, items[0]", items[0]);
 
   // if (isNotEmptyArray(items)) {
   //   console.log(items[0].href);
@@ -47,7 +47,7 @@ export default function Home(props) {
       <h1 className={styles.pageTitle}>
         Образцы работ веб-разработчика <a 
             href="https://freelance.habr.com/freelancers/Lazytech"
-            className="externalLink"
+            className="external_link"
           >
             Lazytech
           </a>
@@ -140,7 +140,7 @@ export async function getServerSideProps() {
       })
     );
 
-    console.log(items[0]);
+    // console.log(items[0]);
 
     return ({
       props: { items }

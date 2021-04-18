@@ -18,11 +18,11 @@ a {
   box-sizing: border-box;
 }
 
-.externalLink {
+.external_link {
   color: black;
 }
 
-.externalLink:hover {
+.external_link:hover {
   text-decoration: underline;
   color: blue;
 }
