@@ -2,7 +2,9 @@ import Head from 'next/head'
 import styles from '../../styles/Project.module.css';
 
 import { useRouter } from 'next/router';
+
 const { JSDOM } = require('jsdom');
+const probe = require('probe-image-size');
 
 import { isNotEmptyArray, isNotEmptyString } from "../../utils/checkers";
 
@@ -60,11 +62,11 @@ export default function Project({info}) {
         }
 
         { images && isNotEmptyArray(images) && 
-          images.map(({src}) => 
+          images.map(({src, width, height}) => 
             <div className={styles.imageContainer}>
               <img src={src} alt="title" 
                 className={styles.image}
-                width="1000" height="800"
+                width={width} height={height}
               />
             </div>
           )
@@ -176,13 +178,32 @@ export async function getServerSideProps(context) {
     // });
 
     const imageNodes = await document.querySelectorAll("div.images > img");
-    const images = Array.from(imageNodes).map((node) => {
+    const images = await Array.from(imageNodes).map((node) => {
+      const src = node.src;
+
+      // Default image size
+      let height = 300;
+      let width = 400;
+
       // Get image width and height...
+      const imageInfo = await probe(src);
+
+      if (imageInfo.height) {
+        height = imageInfo.height;
+      }
+
+      if (imageInfo.width) {
+        width = imageInfo.width;
+      }
+
       return {
-        src: node.src,
+        src,
+        height,
+        width,
       }
     });
-    // console.log("images", images);
+    
+    console.log("images", images);
     info.images = images;
   } 
   catch(err) {
