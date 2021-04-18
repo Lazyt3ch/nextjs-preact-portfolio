@@ -20,7 +20,7 @@
 
 .description {
   width: 100%;
-  max-width: 75rem; /* 1200px */
+  max-width: 60rem; /* 960px */
 
   display: flex;
   flex-direction: column;
