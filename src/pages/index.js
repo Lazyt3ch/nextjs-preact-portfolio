@@ -43,7 +43,9 @@ export default function Home(props) {
                   <div className={styles.imageContainer}
                   >
                     { isNotEmptyString(item.imgSrc)
-                      ? <img src={item.imgSrc} alt={item.title} />
+                      ? <img src={item.imgSrc} alt={item.title} 
+                          width="400" height="300" // freelance.habr.com specific width & height
+                        />
                       // ? null
                       : <div>Preview Image not found :(</div>
                     }              
