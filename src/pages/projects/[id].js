@@ -204,7 +204,7 @@ export async function getServerSideProps(context) {
 
     const images = await Promise.all(imagePromises);
     
-    console.log("images", images);
+    // console.log("images", images);
     info.images = images;
   } 
   catch(err) {
