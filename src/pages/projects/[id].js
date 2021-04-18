@@ -48,6 +48,7 @@ export default function Project({info}) {
                     </p>)
                   : type === 'url'
                     ? (<a href={content} className="external_link" 
+                        target="_blank"
                         style={{display: "block"}}
                         key={idx}
                       >
