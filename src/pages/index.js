@@ -46,17 +46,16 @@ export default function Home(props) {
                           width={item.width} height={item.height} 
                           className={styles.image}
                         />
-                      // ? null
                       : <div>Preview image not found :(</div>
                     }              
                   </div>
-                  <h2 className={styles.flexItemTitle}>{
-                    isNotEmptyString(item.title) 
-                      ? item.title 
-                      : "Project title not found :("
-                  }</h2>
                 </a>
               </Link>
+              <h2 className={styles.flexItemTitle}>{
+                isNotEmptyString(item.title) 
+                  ? item.title 
+                  : "Project title not found :("
+              }</h2>
             </div>
             )
           : <div>"No projects found :("</div>

@@ -33,7 +33,9 @@
 }
 
 .flexItemTitle {
-  margin-bottom: .6rem;
+  display: block;
+
+  margin-top: .5rem;
 
   text-align: center;
 
@@ -43,10 +45,10 @@
   font-size: 1rem;
 }
 
-.flexItemTitle:hover {
+/* .flexItemTitle:hover {
   color: blue;
   text-decoration: underline;
-}
+} */
 
 .imageLink {
   display: flex;
@@ -109,6 +111,7 @@
 
   .imageContainer {
     padding: .5rem;
+    /* margin-bottom: 2.5rem; */
   }  
 }
 
