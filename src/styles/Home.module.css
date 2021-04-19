@@ -59,6 +59,11 @@
   border: 2px solid darkslategray;
 }
 
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
 .imageContainer:hover {
   /* transform: translateY(-.4rem); */
   /* border: 2px solid blue; */

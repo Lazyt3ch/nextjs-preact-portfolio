@@ -48,6 +48,7 @@ export default function Home(props) {
                     { isNotEmptyString(item.src)
                       ? <img src={item.src} alt={item.title} 
                           width={item.width} height={item.height} 
+                          className={styles.image}
                         />
                       // ? null
                       : <div>Preview image not found :(</div>
