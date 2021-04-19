@@ -5,9 +5,7 @@ export default function Navbar() {
   return (
     <div className={styles.navbar}>
       <Link href="/">
-        <a className="external_link">
-          Home
-        </a>
+        <a className="external_link">Home</a>
       </Link>
     </div>
   );
