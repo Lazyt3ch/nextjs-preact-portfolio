@@ -5,23 +5,23 @@ import { useRouter } from 'next/router';
 export default function Navbar() {
   const router = useRouter();
   const { pathname } = router;
-  console.log(pathname);
+  console.log("pathname =", pathname);
+
+  const paths = [
+    { subUrl: "/", text: "На главную", },
+    { subUrl: "/about", text: "О проекте", },
+  ];
 
   return (
     <div className={styles.navbar}>
-      <Link href="/">
-        { pathname === "/"
-          ? <span>На главную</span>
-          : <a className="external_link">На главную</a>
-        }        
-      </Link>
-
-      <Link href="/about">
-        { pathname === "/about"
-          ? <span>О проекте</span>
-          : <a className="external_link">О проекте</a>
-        }        
-      </Link>
+      { paths.map(({subUrl, text}, idx) => 
+          <Link href={subUrl} key={idx}>
+            { subUrl === pathname
+              ? <span className="current_link">{text}</span>
+              : <a className="external_link">{text}</a>
+            }        
+          </Link>
+      )}
     </div>
   );
 };

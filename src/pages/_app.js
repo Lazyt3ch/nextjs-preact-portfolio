@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import Navbar from "../components/navbar";
 import Container from "../components/container";
 
-function MyApp({ Component, pageProps }) {  
+export default function MyApp({ Component, pageProps }) {  
   return (
     <>
       <Navbar />
@@ -13,4 +13,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+

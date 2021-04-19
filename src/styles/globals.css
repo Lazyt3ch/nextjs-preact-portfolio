@@ -26,3 +26,7 @@ a {
   text-decoration: underline;
   color: blue;
 }
+
+.current_link {
+  color: darkslategrey;
+}
