@@ -25,3 +25,8 @@
 .description {
   width: 100%;
 }
+
+.description p {
+  text-indent: 2rem;
+  margin-bottom: .5rem;
+}

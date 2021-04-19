@@ -13,7 +13,10 @@ export default function About() {
           Техническая информация о веб-приложении
         </h1>
         <div className={styles.description}>
-          Данное приложение сделано на фреймворке <a href="https://nextjs.org/" className="external_link">Next.js</a>, основанном на библиотеке <a href="https://reactjs.org/" className="external_link">React</a>.
+          <p>Данное приложение сделано на фреймворке <a href="https://nextjs.org/" className="external_link">Next.js</a>, основанном на библиотеке <a href="https://reactjs.org/" className="external_link">React</a>.</p>
+          <p>Текстовые данные для серверной генерации страниц данного веб-приложения берутся («парсятся») из <a href="https://freelance.habr.com/freelancers/Lazytech" className="external_link">профиля фрилансера Lazytech</a> на сайте <a href="https://freelance.habr.com/" className="external_link">Хабр Фриланс</a>.</p>
+          <p>Отдельные страницы (например, страница <Link href="/about"><a className="external_link">«О проекте»</a></Link>) создаются на сервере не при каждом запросе, а лишь однократно, то есть также используется так называемая статическая генерация страниц.</p>
+          <p>Верстка страниц «отзывчивая» (адаптивная).</p>
         </div>
       </div>
     </>
