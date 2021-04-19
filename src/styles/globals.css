@@ -20,6 +20,8 @@ a {
 
 .external_link {
   color: navy;
+
+  font-weight: 600;
 }
 
 .external_link:hover {
