@@ -28,7 +28,8 @@ export default function Home(props) {
             Lazytech
           </a>
       </h1>
-      <div className={styles.container}>
+
+      <div className={styles.projectsContainer}>
         { isNotEmptyArray(items)
           ? items.map((item, idx) =>
             <div className={styles.flexItem}
