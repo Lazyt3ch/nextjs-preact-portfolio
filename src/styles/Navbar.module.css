@@ -11,8 +11,33 @@
 
   padding: .2rem 1rem;
 
+  font-size: 1.2rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .navbar > * {
-  margin-right: 1rem;
+  margin-right: 1.2rem;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar {
+    padding: .2rem .8rem;
+
+    font-size: 1rem;  
+  }  
+
+  .navbar > * {
+    margin-right: .8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navbar {
+    padding: .2rem .6rem;
+
+    font-size: .7rem;  
+  }  
 }

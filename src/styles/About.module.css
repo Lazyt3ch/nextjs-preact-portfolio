@@ -15,7 +15,7 @@
 
 .pageTitle {
   text-align: center;
-  margin: 1rem 1rem .2rem 1rem;
+  margin: 1rem 1rem .6rem 1rem;
 
   font-size: 1.6rem;
   font-weight: 600;
@@ -29,4 +29,28 @@
 .description p {
   text-indent: 2rem;
   margin-bottom: .5rem;
+}
+
+@media screen and (max-width: 800px) {
+  .pageTitle {
+    font-size: 1.25rem;
+  }
+
+  .container {
+    font-size: 1rem;
+
+    padding: .6rem .6rem 1.2rem;
+  }  
+}
+
+@media screen and (max-width: 400px) {
+  .pageTitle {
+    font-size: .9rem;
+  }
+
+  .container {
+    font-size: .8rem;
+
+    padding: .3rem .3rem .8rem;
+  }   
 }
