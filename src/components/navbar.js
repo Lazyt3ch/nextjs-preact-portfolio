@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 export default function Navbar() {
   const router = useRouter();
   const { pathname } = router;
-  console.log("pathname =", pathname);
+  // console.log("pathname =", pathname);
 
   const paths = [
     { subUrl: "/", text: "На главную", },
