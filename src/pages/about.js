@@ -7,8 +7,9 @@ export default function About() {
   return (
     <>
       <Head />
+      
       <div>
-
+        About Project
       </div>
     </>
   );
