@@ -7,6 +7,7 @@ const { JSDOM } = require('jsdom');
 const probe = require('probe-image-size');
 
 import { isNotEmptyArray, isNotEmptyString } from "../../utils/checkers";
+import React from 'react';
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 // https://freelance.habr.com/projects/221255
@@ -15,8 +16,6 @@ const baseUrl = "https://freelance.habr.com";
 export default function Project({info}) {
   const router = useRouter();
   const { id } = router.query;
-  
-  // console.log("info", info);
 
   const { title, description, images } = info;
   
@@ -25,6 +24,7 @@ export default function Project({info}) {
       <Head>
         <title>Образец работы | {title}</title>
       </Head>
+
       <h1 className={styles.pageTitle}>{ title }</h1>
 
       <div className={styles.container}>        
@@ -37,22 +37,23 @@ export default function Project({info}) {
 
             {
               description.map(({type, content}, idx) => 
-                type === 'text'
-                  ? (<p key={idx}>
-                      {content}
-                    </p>)
-                  : type === 'url'
-                    ? (<a href={content} className="external_link" 
-                        target="_blank"
-                        rel="noopener"
-                        style={{display: "block"}}
-                        key={idx}
-                      >
+                <React.Fragment key={idx}>
+                  type === 'text'
+                    ? (<p>
                         {content}
-                      </a>)
-                    : type === 'br' && (idx === 0 || description[idx - 1].type !== 'br')
-                      ? <br key={idx} />
-                      : null
+                      </p>)
+                    : type === 'url'
+                      ? (<a href={content} className="external_link" 
+                          target="_blank"
+                          rel="noopener"
+                          style={{display: "block"}}
+                        >
+                          {content}
+                        </a>)
+                      : type === 'br' && (idx === 0 || description[idx - 1].type !== 'br')
+                        ? <br />
+                        : null
+                </React.Fragment>
               )
             }
           </div>
