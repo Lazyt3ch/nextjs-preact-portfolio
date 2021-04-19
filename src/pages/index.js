@@ -26,6 +26,7 @@ export default function Home(props) {
             href="https://freelance.habr.com/freelancers/Lazytech"
             className="external_link"
             target="_blank"
+            rel="noopener"
           >
             Lazytech
           </a>
