@@ -7,6 +7,9 @@ export default function Navbar() {
       <Link href="/">
         <a className="external_link">На главную</a>
       </Link>
+      <Link href="/about">
+        <a className="external_link">О проекте</a>
+      </Link>
     </div>
   );
 };
