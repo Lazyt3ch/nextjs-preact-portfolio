@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+
 const { JSDOM } = require('jsdom');
+const probe = require('probe-image-size');
+
 import Link from "next/link";
 import {isNotEmptyArray, isNotEmptyString} from "../utils/checkers";
 
@@ -31,7 +34,6 @@ export default function Home(props) {
             <div className={styles.flexItem}
               key={item.id && item.id.length ? item.id : (-idx).toString()}
             >
-              {/* <Link href={ `${baseUrl}${item.href}` } target="_blank"> */}
               <Link href={ `/projects/${item.id}` } target="_blank">
                 <a 
                   className={styles.imageLink}
@@ -43,12 +45,12 @@ export default function Home(props) {
                   }</h2>
                   <div className={styles.imageContainer}
                   >
-                    { isNotEmptyString(item.imgSrc)
-                      ? <img src={item.imgSrc} alt={item.title} 
-                          width="400" height="300" // freelance.habr.com specific width & height
+                    { isNotEmptyString(item.src)
+                      ? <img src={item.src} alt={item.title} 
+                          width={item.width} height={item.height} 
                         />
                       // ? null
-                      : <div>Preview Image not found :(</div>
+                      : <div>Preview image not found :(</div>
                     }              
                   </div>
                 </a>
@@ -84,14 +86,62 @@ export async function getServerSideProps() {
     const document = dom.window.document;
 
     const nodes = await document.querySelectorAll(".project_item");
+    const nodesArray = Array.from(nodes);
 
-    const items = Array.from(nodes).map((item, idx) => ({
-        title: item.title,
-        href: item.href,
-        id: item.dataset.id,
-        imgSrc: nodes[idx].querySelector(".thumb img").src,
-      })
-    );
+    const itemPromises = nodesArray.map(async (nodeItem, idx) => {
+      const src = nodes[idx].querySelector(".thumb img").src;
+
+      const item = {
+        title: nodeItem.title,
+        href: nodeItem.href,
+        id: nodeItem.dataset.id,
+        src,
+      };
+      
+      // Default image size (freelance.habr.com specific height & width)
+      let height = 300;
+      let width = 400;
+
+      // Get image width and height
+      const imageInfo = await probe(src);
+
+      height = imageInfo.height || height;
+      width = imageInfo.width || width;      
+
+      item.height = imageInfo.height || height;
+      item.width = imageInfo.width || width;      
+      
+      return item;
+    });
+
+    const items = await Promise.all(itemPromises);
+
+    // const imageNodes = await document.querySelectorAll("div.images > img");
+
+    // const imageItems = Array.from(imageNodes);
+
+    // const imagePromises = imageItems.map(async (node) => {
+    //   const src = node.src;
+
+    //   // Default image size
+    //   let height = 800;
+    //   let width = 1000;
+
+    //   // Get image width and height
+    //   const imageInfo = await probe(src);
+
+    //   height = imageInfo.height || height;
+    //   width = imageInfo.width || width;
+
+    //   return {
+    //     src,
+    //     height,
+    //     width,
+    //   };
+    // });
+
+    // const images = await Promise.all(imagePromises);
+        
 
     // console.log(items[0]);
 
