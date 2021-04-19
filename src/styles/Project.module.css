@@ -1,6 +1,5 @@
 .pageTitle {
   text-align: center;
-  /* margin: 1rem; */
   margin: 1rem 1rem .2rem 1rem;
 
   font-size: 1.6rem;
@@ -31,6 +30,8 @@
 
   font-size: 1.2rem;
   font-weight: 400;
+
+  word-break: break-all;
 }
 
 .imageContainer {
@@ -56,6 +57,13 @@
 
     padding: .6rem .6rem 1.2rem;
   }  
+
+  .imageContainer {
+    margin-bottom: .6rem;
+    padding: .6rem;
+  
+    border: 1px solid darkslategray;
+  }  
 }
 
 @media screen and (max-width: 400px) {
@@ -68,4 +76,9 @@
 
     padding: .3rem .3rem .8rem;
   }  
+
+  .imageContainer {
+    margin-bottom: .3rem;
+    padding: .3rem;
+  }    
 }
