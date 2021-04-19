@@ -22,8 +22,9 @@ export default function Project({info}) {
   
   return (
     <>
-      <Head />
-
+      <Head>
+        <title>Образец работы | {title}</title>
+      </Head>
       <h1 className={styles.pageTitle}>{ title }</h1>
 
       <div className={styles.container}>        

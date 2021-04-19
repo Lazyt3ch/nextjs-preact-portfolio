@@ -6,7 +6,9 @@ import Link from "next/link";
 export default function About() {
   return (
     <>
-      <Head />
+      <Head>
+        <title>Техническая информация о веб-приложении</title>
+      </Head>
 
       <div className={styles.container}>
         <h1 className={styles.pageTitle}>

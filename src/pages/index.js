@@ -17,7 +17,9 @@ export default function Home(props) {
 
   return (
     <>
-      <Head />
+      <Head>
+        <title>Главная страница</title>
+      </Head>
 
       <h1 className={styles.pageTitle}>
         Образцы работ веб-разработчика <a 
