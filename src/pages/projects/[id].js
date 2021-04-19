@@ -38,7 +38,7 @@ export default function Project({info}) {
             {
               description.map(({type, content}, idx) => 
                 <React.Fragment key={idx}>
-                  type === 'text'
+                  { type === 'text'
                     ? (<p>
                         {content}
                       </p>)
@@ -53,6 +53,7 @@ export default function Project({info}) {
                       : type === 'br' && (idx === 0 || description[idx - 1].type !== 'br')
                         ? <br />
                         : null
+                  }
                 </React.Fragment>
               )
             }
