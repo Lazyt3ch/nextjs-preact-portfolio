@@ -39,11 +39,6 @@ export default function Home(props) {
                 <a 
                   className={styles.imageLink}
                 >
-                  <h2 className={styles.flexItemTitle}>{
-                    isNotEmptyString(item.title) 
-                      ? item.title 
-                      : "Project title not found :("
-                  }</h2>
                   <div className={styles.imageContainer}
                   >
                     { isNotEmptyString(item.src)
@@ -55,6 +50,11 @@ export default function Home(props) {
                       : <div>Preview image not found :(</div>
                     }              
                   </div>
+                  <h2 className={styles.flexItemTitle}>{
+                    isNotEmptyString(item.title) 
+                      ? item.title 
+                      : "Project title not found :("
+                  }</h2>
                 </a>
               </Link>
             </div>

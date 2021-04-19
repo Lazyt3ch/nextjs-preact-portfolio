@@ -2,6 +2,7 @@
   margin-top: 2rem;
 
   width: 98vw;
+  width: calc(100vw - 30px);
   height: 100%;
 
   display: flex;
