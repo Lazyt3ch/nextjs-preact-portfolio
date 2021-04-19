@@ -24,12 +24,6 @@ export default function Project({info}) {
     <>
       <Head />
 
-      {/* <div>
-        DEBUG
-        <br />
-        Post: {id}
-      </div> */}
-
       <h1 className={styles.pageTitle}>{ title }</h1>
 
       <div className={styles.container}>        
@@ -83,12 +77,7 @@ export default function Project({info}) {
 
 
 export async function getServerSideProps(context) {
-  // console.log("PROJECTS: getServerSideProps");
-  // console.log("context", context);
-
   const { id } = context.query;
-  // console.log("getServerSideProps:  id", id);
-
   const info = {};
 
   try {
