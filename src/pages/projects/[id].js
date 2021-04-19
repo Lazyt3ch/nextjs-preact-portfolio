@@ -60,8 +60,8 @@ export default function Project({info}) {
         }
 
         { images && isNotEmptyArray(images) && 
-          images.map(({src, width, height}) => 
-            <div className={styles.imageContainer}>
+          images.map(({src, width, height}, idx) => 
+            <div className={styles.imageContainer} key={idx}>
               <img src={src} alt="title" 
                 className={styles.image}
                 width={width} height={height}
