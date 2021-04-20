@@ -1,13 +1,15 @@
-import Head from 'next/head'
-import styles from '../../styles/Project.module.css';
+import Head from 'next/head';
+import { useRouter } from 'next/router';;
 
-import { useRouter } from 'next/router';
+import React from 'react';
 
-const { JSDOM } = require('jsdom');
+// Unfortunately, JSDON seems to be incompatible with Netlify
+const { parse } = require('node-html-parser');
+
 const probe = require('probe-image-size');
 
+import styles from '../../styles/Project.module.css';
 import { isNotEmptyArray, isNotEmptyString } from "../../utils/checkers";
-import React from 'react';
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 // https://freelance.habr.com/projects/221255
@@ -73,12 +75,9 @@ export default function Project({info}) {
         }
 
       </div>
-
-
     </>
   );
 }
-
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
@@ -104,10 +103,8 @@ export async function getServerSideProps(context) {
     const end = text.indexOf(closer, start + opener.length);
     const fragment = text.slice(start, end + closer.length);
 
-    const dom = await new JSDOM(fragment);
-    const document = dom.window.document;
-
-    const title = await document.querySelector("h1.name").textContent;
+    const root = parse(fragment);
+    const title = root.querySelector("h1.name").textContent;
     info.title = title;
 
     const brObj = {
@@ -115,8 +112,9 @@ export async function getServerSideProps(context) {
       content: null,
     };
 
-    const descriptionNode = await document.querySelector("div.description");
-    let description = Array.from(descriptionNode.childNodes)
+    const descriptionSubnodes = root.querySelectorAll("div.description");
+    
+    let description = descriptionSubnodes
       .map((child) => {
         if (child.nodeType === 3) { // Node.TEXT_NODE
           return ({
@@ -125,14 +123,16 @@ export async function getServerSideProps(context) {
           });
         }
 
-        if (child.tagName === "A") {
+        const tagName = child.rawTagName.toUpperCase();
+
+        if (tagName === "A") {
           return ({
             type: 'url',
-            content: child.href,
+            content: child._attrs.href,
           });
         }        
 
-        if (child.tagName === "BR") {
+        if (tagName === "BR") {
           return brObj;
         }          
         
@@ -147,8 +147,6 @@ export async function getServerSideProps(context) {
 
     if (description.length > 3) {
       for (let i = description.length - 2; i > 1; i--) {
-        // console.log(i, description[i], description[i].type);
-        
         if (description[i].type === 'br' 
           && (description.length >= i && description[i + 1].type === 'url')
           && description[i - 1].type === 'text'
@@ -165,19 +163,16 @@ export async function getServerSideProps(context) {
       }  
     }
 
-    // console.log("description =", description);
     info.description = description;
 
-    // description.forEach((child) => {
-    //   console.log(child, " ==== ", child.nodeType);
-    // });
-
-    const imageNodes = await document.querySelectorAll("div.images > img");
-
-    const imageItems = Array.from(imageNodes);
+    const imageItems = root.querySelectorAll("div.images > img");
+    const srcRegex = /src\s*=\s*['"](\S+)['"]/;
 
     const imagePromises = imageItems.map(async (node) => {
-      const src = node.src;
+      // console.log("imagePromises:  node =\n", node);
+      const src = node.rawAttrs.match(srcRegex)[1];
+      // src = src="https://habrastorage.org/getpro/freelansim/allfiles/75/758/758671/92f7817d2b.png" alt="92f7817d2b"
+      // console.log("MATCHED: src =", src);
 
       // Default image size
       let height = 800;
