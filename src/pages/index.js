@@ -27,6 +27,7 @@ export default function Home(props) {
         Образцы работ веб-разработчика <a 
             href="https://freelance.habr.com/freelancers/Lazytech"
             className="external_link"
+            style={{ wordBreak: 'normal' }}
             target="_blank"
             rel="noopener"
           >
