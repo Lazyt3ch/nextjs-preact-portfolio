@@ -10,6 +10,7 @@ const probe = require('probe-image-size');
 
 import styles from '../../styles/Project.module.css';
 import { isNotEmptyArray, isNotEmptyString } from "../../utils/checkers";
+import { decodeHTMLEntities } from "../../utils/decodeEntities";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 // https://freelance.habr.com/projects/221255
@@ -112,29 +113,39 @@ export async function getServerSideProps(context) {
       content: null,
     };
 
-    const descriptionSubnodes = root.querySelectorAll("div.description");
+    // const descriptionSubnodes = root.querySelectorAll("div.description *");
+    // console.log("descriptionSubnodes.length =", descriptionSubnodes.length);
+    const descriptionNode = root.querySelector("div.description");
+    const hrefRegex = /href\s*=\s*['"](\S+)['"]/;
     
-    let description = descriptionSubnodes
+    // let description = descriptionSubnodes
+    let description = descriptionNode.childNodes
       .map((child) => {
+        // console.log("\n child = \n", child);
+
         if (child.nodeType === 3) { // Node.TEXT_NODE
+          // console.log("\n child = \n", child);
           return ({
             type: 'text',
-            content: child.textContent,
+            // content: child.textContent,
+            content: decodeHTMLEntities(child.text), 
           });
         }
 
         const tagName = child.rawTagName.toUpperCase();
 
-        if (tagName === "A") {
-          return ({
-            type: 'url',
-            content: child._attrs.href,
-          });
-        }        
-
         if (tagName === "BR") {
           return brObj;
         }          
+
+        if (tagName === "A") {
+          return ({
+            type: 'url',
+            // content: child._attrs.href,
+            content: child.rawAttrs.match(hrefRegex)[1],
+          });
+        }        
+
         
         return brObj;
       });
