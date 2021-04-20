@@ -34,6 +34,15 @@
   /* word-break: break-all; */
 }
 
+.description a {
+  margin-bottom: 0.5rem;
+}
+
+.description p {
+  text-indent: 2rem;
+  margin-bottom: 0.5rem;
+}
+
 .imageContainer {
   margin-bottom: 1rem;
   padding: 1rem;

@@ -35,7 +35,7 @@ export default function Project({info}) {
         { description && isNotEmptyArray(description) && 
           <div className={styles.description}>
             { description[0].type === 'url' &&
-              <div>Работающее веб-приложение:</div>
+              <p>Работающее веб-приложение:</p>
             }
 
             {
