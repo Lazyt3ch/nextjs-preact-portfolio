@@ -1,10 +1,12 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import Link from "next/link";
 
-const { JSDOM } = require('jsdom');
+// Unfortunately, JSDON seems to be incompatible with Netlify
+const { parse } = require('node-html-parser');
+
 const probe = require('probe-image-size');
 
-import Link from "next/link";
+import styles from '../styles/Home.module.css';
 import {isNotEmptyArray, isNotEmptyString} from "../utils/checkers";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
@@ -13,7 +15,7 @@ const baseUrl = "https://freelance.habr.com";
 export default function Home(props) {
   const { items } = props;
 
-  console.log("Home: rendering data...");
+  // console.log("Home: rendering data...");
 
   return (
     <>
@@ -86,19 +88,50 @@ export async function getServerSideProps() {
     const end = text.indexOf("</dl>", start + 4);
     const fragment = text.slice(start, end + 5);
 
-    const dom = await new JSDOM(fragment);
-    const document = dom.window.document;
+    const root = parse(fragment);
+    // console.log("root =\n", root);
 
-    const nodes = await document.querySelectorAll(".project_item");
-    const nodesArray = Array.from(nodes);
+    // const dom = await new JSDOM(fragment);
+    // const document = dom.window.document;
+    // console.log("document =\n", document);
+
+    // const nodes2 = root.querySelectorAll(".project_item")
+    // console.log("nodes2[0] =\n", nodes2[0]);
+    // const title2 = nodes2[0]._attrs.title;
+    // console.log("title2 =", title2);
+    // const href2 = nodes2[0]._attrs.href;
+    // console.log("href2 =", href2);
+    // const id2 = nodes2[0]._attrs['data-id'];
+    // console.log("id2 =", id2);
+
+    // const nodes = await document.querySelectorAll(".project_item");
+    const nodesArray = root.querySelectorAll(".project_item");
+    
+    const srcArray = root.querySelectorAll(".project_item .thumb img")
+      .map((imageNode) => imageNode._attrs.src);
+    // console.log("srcArray =", srcArray);
 
     const itemPromises = nodesArray.map(async (nodeItem, idx) => {
-      const src = nodes[idx].querySelector(".thumb img").src;
+      // const src = nodes[idx].childNodes.querySelector(".thumb img").src;
+      // const selector = `.project_item::nth-child(${idx + 1}) .thumb img`;
+      // console.log("selector = ", selector);
+      // const src = nodes[idx].querySelector(selector).src;
+      // const src = root.querySelector(selector).src;
+      // console.log("src =", src);
+
+      // const item = {
+      //   title: nodeItem.title,
+      //   href: nodeItem.href,
+      //   id: nodeItem.dataset.id,
+      //   src,
+      // };
+
+      const src = srcArray[idx];
 
       const item = {
-        title: nodeItem.title,
-        href: nodeItem.href,
-        id: nodeItem.dataset.id,
+        title: nodeItem._attrs.title,
+        href: nodeItem._attrs.href,
+        id: nodeItem._attrs["data-id"],
         src,
       };
       
