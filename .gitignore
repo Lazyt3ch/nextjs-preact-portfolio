@@ -35,3 +35,5 @@ yarn-error.log*
 
 #es lint
 .eslintcache
+# Local Netlify folder
+.netlify
