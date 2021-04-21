@@ -91,12 +91,40 @@ export async function getServerSideProps() {
 
     const root = parse(fragment);
     const nodesArray = root.querySelectorAll(".project_item");
-    
-    const srcArray = root.querySelectorAll(".project_item .thumb img")
-      .map((imageNode) => imageNode._attrs.src);
+
+    const classRegex = /class\s*=\s*['"](\S+)['"]/;
+    const srcRegex = /src\s*=\s*['"](\S+)['"]/;
+    let src;
+    let thumbNode;
+    let imageNode;
 
     const itemPromises = nodesArray.map(async (nodeItem, idx) => {
-      const src = srcArray[idx];
+      src = "";
+      thumbNode = null;
+      imageNode = null;
+
+      const childNodes = nodeItem.childNodes;
+
+      for (let i = childNodes.length - 1; i >= 0; i--) {
+        let rawAttrs = childNodes[i].rawAttrs;
+        if (rawAttrs) {
+          let childNodeClassMatch = rawAttrs.match(classRegex);
+          if (childNodeClassMatch && childNodeClassMatch[1].toLowerCase() === "thumb") {
+            thumbNode = childNodes[i];
+            break;
+          }
+        }
+      }
+
+      if (thumbNode) {
+        const subNodes = thumbNode.childNodes;
+        for (let i = subNodes.length - 1; i >= 0; i--) {
+          if (subNodes[i].rawTagName.toLowerCase() === 'img') {
+            src = subNodes[i].rawAttrs.match(srcRegex)[1];
+            break;
+          }
+        }
+      }
 
       const item = {
         title: nodeItem._attrs.title,
