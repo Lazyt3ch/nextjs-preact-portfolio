@@ -54,9 +54,10 @@ export default function Project({info}) {
                         >
                           {content}
                         </a>)
-                      : type === 'br' && (idx === 0 || description[idx - 1].type !== 'br')
-                        ? <br />
-                        : null
+                      : null
+                      // : type === 'br' && (idx === 0 || description[idx - 1].type !== 'br')
+                      //   ? <br />
+                      //   : null
                   }
                 </React.Fragment>
               )
@@ -139,7 +140,6 @@ export async function getServerSideProps(context) {
             content: child.rawAttrs.match(hrefRegex)[1],
           });
         }        
-
         
         return brObj;
       });
