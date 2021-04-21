@@ -15,8 +15,6 @@ const baseUrl = "https://freelance.habr.com";
 export default function Home(props) {
   const { items } = props;
 
-  // console.log("Home: rendering data...");
-
   return (
     <>
       <Head>
@@ -90,43 +88,12 @@ export async function getServerSideProps() {
     const fragment = text.slice(start, end + 5);
 
     const root = parse(fragment);
-    // console.log("root =\n", root);
-
-    // const dom = await new JSDOM(fragment);
-    // const document = dom.window.document;
-    // console.log("document =\n", document);
-
-    // const nodes2 = root.querySelectorAll(".project_item")
-    // console.log("nodes2[0] =\n", nodes2[0]);
-    // const title2 = nodes2[0]._attrs.title;
-    // console.log("title2 =", title2);
-    // const href2 = nodes2[0]._attrs.href;
-    // console.log("href2 =", href2);
-    // const id2 = nodes2[0]._attrs['data-id'];
-    // console.log("id2 =", id2);
-
-    // const nodes = await document.querySelectorAll(".project_item");
     const nodesArray = root.querySelectorAll(".project_item");
     
     const srcArray = root.querySelectorAll(".project_item .thumb img")
       .map((imageNode) => imageNode._attrs.src);
-    // console.log("srcArray =", srcArray);
 
     const itemPromises = nodesArray.map(async (nodeItem, idx) => {
-      // const src = nodes[idx].childNodes.querySelector(".thumb img").src;
-      // const selector = `.project_item::nth-child(${idx + 1}) .thumb img`;
-      // console.log("selector = ", selector);
-      // const src = nodes[idx].querySelector(selector).src;
-      // const src = root.querySelector(selector).src;
-      // console.log("src =", src);
-
-      // const item = {
-      //   title: nodeItem.title,
-      //   href: nodeItem.href,
-      //   id: nodeItem.dataset.id,
-      //   src,
-      // };
-
       const src = srcArray[idx];
 
       const item = {
@@ -153,35 +120,6 @@ export async function getServerSideProps() {
     });
 
     const items = await Promise.all(itemPromises);
-
-    // const imageNodes = await document.querySelectorAll("div.images > img");
-
-    // const imageItems = Array.from(imageNodes);
-
-    // const imagePromises = imageItems.map(async (node) => {
-    //   const src = node.src;
-
-    //   // Default image size
-    //   let height = 800;
-    //   let width = 1000;
-
-    //   // Get image width and height
-    //   const imageInfo = await probe(src);
-
-    //   height = imageInfo.height || height;
-    //   width = imageInfo.width || width;
-
-    //   return {
-    //     src,
-    //     height,
-    //     width,
-    //   };
-    // });
-
-    // const images = await Promise.all(imagePromises);
-        
-
-    // console.log(items[0]);
 
     return ({
       props: { items }
