@@ -113,21 +113,14 @@ export async function getServerSideProps(context) {
       content: null,
     };
 
-    // const descriptionSubnodes = root.querySelectorAll("div.description *");
-    // console.log("descriptionSubnodes.length =", descriptionSubnodes.length);
     const descriptionNode = root.querySelector("div.description");
     const hrefRegex = /href\s*=\s*['"](\S+)['"]/;
     
-    // let description = descriptionSubnodes
     let description = descriptionNode.childNodes
       .map((child) => {
-        // console.log("\n child = \n", child);
-
         if (child.nodeType === 3) { // Node.TEXT_NODE
-          // console.log("\n child = \n", child);
           return ({
             type: 'text',
-            // content: child.textContent,
             content: decodeHTMLEntities(child.text), 
           });
         }
@@ -141,7 +134,6 @@ export async function getServerSideProps(context) {
         if (tagName === "A") {
           return ({
             type: 'url',
-            // content: child._attrs.href,
             content: child.rawAttrs.match(hrefRegex)[1],
           });
         }        
@@ -180,10 +172,8 @@ export async function getServerSideProps(context) {
     const srcRegex = /src\s*=\s*['"](\S+)['"]/;
 
     const imagePromises = imageItems.map(async (node) => {
-      // console.log("imagePromises:  node =\n", node);
       const src = node.rawAttrs.match(srcRegex)[1];
       // src = src="https://habrastorage.org/getpro/freelansim/allfiles/75/758/758671/92f7817d2b.png" alt="92f7817d2b"
-      // console.log("MATCHED: src =", src);
 
       // Default image size
       let height = 800;
@@ -204,7 +194,6 @@ export async function getServerSideProps(context) {
 
     const images = await Promise.all(imagePromises);
     
-    // console.log("images", images);
     info.images = images;
   } 
   catch(err) {
