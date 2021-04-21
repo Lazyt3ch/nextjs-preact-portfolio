@@ -105,6 +105,7 @@ export async function getServerSideProps() {
 
       const childNodes = nodeItem.childNodes;
 
+      // Get class="thumb" element that contains the img element
       for (let i = childNodes.length - 1; i >= 0; i--) {
         let rawAttrs = childNodes[i].rawAttrs;
         if (rawAttrs) {
@@ -116,10 +117,11 @@ export async function getServerSideProps() {
         }
       }
 
+      // Get src of the img element
       if (thumbNode) {
         const subNodes = thumbNode.childNodes;
         for (let i = subNodes.length - 1; i >= 0; i--) {
-          if (subNodes[i].rawTagName.toLowerCase() === 'img') {
+          if (subNodes[i].rawTagName && subNodes[i].rawTagName.toLowerCase() === 'img') {
             src = subNodes[i].rawAttrs.match(srcRegex)[1];
             break;
           }
