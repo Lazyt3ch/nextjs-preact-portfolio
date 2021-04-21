@@ -11,6 +11,7 @@ const probe = require('probe-image-size');
 import styles from '../../styles/Project.module.css';
 import { isNotEmptyArray, isNotEmptyString } from "../../utils/checkers";
 import { decodeHTMLEntities } from "../../utils/decodeEntities";
+import { getRegex } from "../../utils/getRegex";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 // https://freelance.habr.com/projects/221255
@@ -114,7 +115,8 @@ export async function getServerSideProps(context) {
     };
 
     const descriptionNode = root.querySelector("div.description");
-    const hrefRegex = /href\s*=\s*['"](\S+)['"]/;
+    // const hrefRegex = /href\s*=\s*['"](\S+)['"]/;
+    const hrefRegex = getRegex("href");
     
     let description = descriptionNode.childNodes
       .map((child) => {
@@ -169,7 +171,8 @@ export async function getServerSideProps(context) {
     info.description = description;
 
     const imageItems = root.querySelectorAll("div.images > img");
-    const srcRegex = /src\s*=\s*['"](\S+)['"]/;
+    // const srcRegex = /src\s*=\s*['"](\S+)['"]/;
+    const srcRegex = getRegex("src");
 
     const imagePromises = imageItems.map(async (node) => {
       const src = node.rawAttrs.match(srcRegex)[1];

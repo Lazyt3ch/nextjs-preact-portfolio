@@ -8,6 +8,7 @@ const probe = require('probe-image-size');
 
 import styles from '../styles/Home.module.css';
 import {isNotEmptyArray, isNotEmptyString} from "../utils/checkers";
+import {getRegex} from "../utils/getRegex";
 
 // https://freelance.habr.com/freelancers/Lazytech/projects
 const baseUrl = "https://freelance.habr.com";
@@ -92,8 +93,10 @@ export async function getServerSideProps() {
     const root = parse(fragment);
     const nodesArray = root.querySelectorAll(".project_item");
 
-    const classRegex = /class\s*=\s*['"](\S+)['"]/;
-    const srcRegex = /src\s*=\s*['"](\S+)['"]/;
+    // const classRegex = /class\s*=\s*['"](\S+)['"]/;
+    // const srcRegex = /src\s*=\s*['"](\S+)['"]/;
+    const classRegex = getRegex("class");
+    const srcRegex = getRegex("src");
     let src;
     let thumbNode;
     let imageNode;
