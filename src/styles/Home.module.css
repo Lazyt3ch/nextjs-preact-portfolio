@@ -79,6 +79,21 @@
   height: auto;
 }
 
+.imageSubstitute {
+  width: 25rem; /* 400px */
+  height: 18.75rem; /* 300px */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: cadetblue;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: darkslategray;
+}
+
 @media screen and (max-width: 1000px) {
   .projectsContainer {
     display: flex;
@@ -115,6 +130,10 @@
     padding: 0.5rem;
     /* margin-bottom: 2.5rem; */
   }
+
+  .imageSubstitute {
+    font-size: .8rem;
+  }  
 }
 
 @media screen and (max-width: 400px) {
@@ -133,4 +152,8 @@
   .imageContainer {
     padding: 0.2rem;
   }
+
+  .imageSubstitute {
+    font-size: .4rem;
+  }  
 }

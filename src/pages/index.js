@@ -50,7 +50,9 @@ export default function Home(props) {
                           width={item.width} height={item.height} 
                           className={styles.image}
                         />
-                      : <div>Preview image not found :(</div>
+                      : <div className={styles.imageSubstitute} >
+                          Без обложки
+                        </div>
                     }              
                   </div>
                 </a>
