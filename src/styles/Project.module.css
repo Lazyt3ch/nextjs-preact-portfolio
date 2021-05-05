@@ -54,6 +54,8 @@
 .image {
   max-width: 100%;
   height: auto;
+
+  background-color: lightgray;
 }
 
 @media screen and (max-width: 800px) {
