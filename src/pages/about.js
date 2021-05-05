@@ -19,8 +19,8 @@ export default function About() {
           <p>Текстовые данные для серверной генерации страниц приложения берутся из <a href="https://freelance.habr.com/freelancers/Lazytech" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">профиля фрилансера Lazytech</a> на сайте <a href="https://freelance.habr.com/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Хабр Фриланс</a>.</p>
           <p>Верстка страниц адаптивная («отзывчивая»). Изображения, показываемые на страницах, хранятся на стороннем сайте. Поскольку ширина и высота картинок в общем случае неизвестны и могут быть произвольными, пришлось принять меры по предотвращению перетекания содержимого и подергивания страницы при их загрузке и отрисовке. С этой целью сервер приложения сначала запрашивает со стороннего сайта параметры всех изображений, а затем генерирует страницу с учетом полученных размеров.</p>
           <p>Отдельные страницы (например, данная страница) создаются на сервере не при каждом запросе, а лишь однократно («статическая генерация»), что позволяет снизить нагрузку на сервер.</p>
-          <p><a href="https://nextjs-lazytech-portfolio-20210420-2.netlify.app" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Первоначальный вариант</a> проекта был реализован на фреймворке Next.js «из коробки», то есть как на сервере, так и на клиенте использовалась библиотека React. Однако эта библиотека достаточно «тяжелая» для столь простого веб-приложения, поэтому в данном варианте проекта на клиенте вместо нее используется ее более «легкий» аналог <a href="https://reactjs.org/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Preact</a> (на сервере, как и раньше, используется React). Вероятно, обновленное приложение будет несколько быстрее открываться на «слабых» устройствах, поскольку клиентскому браузеру придется загружать и парсить меньше JavaScript-кода (см. два скриншота ниже).</p>
-          <p>Вот как загружается старый вариант приложения, в котором используется React:</p>
+          <p><a href="https://nextjs-lazytech-portfolio-20210420-2.netlify.app" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Первоначальный вариант</a> проекта был реализован на фреймворке Next.js «из коробки», то есть как на сервере, так и на клиенте использовалась библиотека React. Однако эта библиотека достаточно «тяжелая» для столь простого веб-приложения, поэтому в данном варианте проекта на клиенте вместо нее используется ее более «легкий» аналог <a href="https://reactjs.org/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Preact</a> (для серверного рендеринга, как и раньше, используется React). Новый вариант особенно хорошо подходит для «слабых» клиентских устройств, поскольку клиентский браузер загружает и парсит меньше JavaScript-кода (см. два скриншота ниже).</p>
+          <p>Вот как загружается старый вариант приложения, в котором везде используется React:</p>
           <div className={styles.imageContainer}>
             <img src='/assets/images/react-network.gif' 
               alt='Старая версия (React)' 
@@ -28,7 +28,7 @@ export default function About() {
               loading='lazy'     
             />
           </div>
-          <p>А вот как загружается новый вариант, в котором на клиенте используется Preact:</p>
+          <p>А вот процесс загрузки нового варианта, в котором на клиенте используется Preact:</p>
           <div className={styles.imageContainer}>
             <img src='/assets/images/preact-network.gif' 
               alt='Новая версия (Preact)' 
@@ -36,6 +36,7 @@ export default function About() {
               loading='lazy'
             />
           </div>
+          <p>Перевести клиентскую часть приложения с React на Preact оказалось очень просто. Сначала я установил свежую версию Preact (которая, в отличие от более ранних версий, содержит в себе модуль <a href="https://github.com/preactjs/preact-compat" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">preact-compat</a>, так что мне не понадобилось отдельно его устанавливать). Далее я внес изменения в файл next.config.js, опираясь на статьи <a href="https://dev.to/dlw/next-js-replace-react-with-preact-2i72" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Next.js: Replace React with Preact</a> и <a href="https://vercel.com/blog/10-next-js-tips-you-might-not-know" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">10 Next.js Tips You Might Not Know</a>. И всё, приложение запустилось без ошибок с первой попытки!</p>
         </div>
       </div>
     </>
