@@ -19,17 +19,23 @@ export default function About() {
           <p>Текстовые данные для серверной генерации страниц приложения берутся из <a href="https://freelance.habr.com/freelancers/Lazytech" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">профиля фрилансера Lazytech</a> на сайте <a href="https://freelance.habr.com/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Хабр Фриланс</a>.</p>
           <p>Верстка страниц адаптивная («отзывчивая»). Изображения, показываемые на страницах, хранятся на стороннем сайте. Поскольку ширина и высота картинок в общем случае неизвестны и могут быть произвольными, пришлось принять меры по предотвращению перетекания содержимого и подергивания страницы при их загрузке и отрисовке. С этой целью сервер приложения сначала запрашивает со стороннего сайта параметры всех изображений, а затем генерирует страницу с учетом полученных размеров.</p>
           <p>Отдельные страницы (например, данная страница) создаются на сервере не при каждом запросе, а лишь однократно («статическая генерация»), что позволяет снизить нагрузку на сервер.</p>
-          <p>Первоначально как на сервере, так и на клиенте использовалась библиотека React. Однако эта библиотека достаточно «тяжелая» для столь простого веб-приложения, поэтому в текущей версии приложения на клиенте вместо нее используется ее более «легкий» аналог <a href="https://reactjs.org/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Preact</a> (на сервере, как и раньше, используется React). Клиентскому браузеру приходится загружать и парсить меньшее количество JavaScript-кода, поэтому приложение, вероятно, будет несколько быстрее открываться на «слабых» устройствах (см. два скриншота ниже).</p>
-          <p>Вот как загружается старая версия:</p>
-          <img src='/assets/images/react-network.gif' 
-            alt='Старая версия (React)' 
-            className='centered'          
-          />
-          <p>А вот как загружается новая версия:</p>
-          <img src='/assets/images/preact-network.gif' 
-            alt='Новая версия (Preact)' 
-            className='centered'          
-          />
+          <p><a href="https://nextjs-lazytech-portfolio-20210420-2.netlify.app" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Первоначальный вариант</a> проекта был реализован на фреймворке Next.js «из коробки», то есть как на сервере, так и на клиенте использовалась библиотека React. Однако эта библиотека достаточно «тяжелая» для столь простого веб-приложения, поэтому в данном варианте проекта на клиенте вместо нее используется ее более «легкий» аналог <a href="https://reactjs.org/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Preact</a> (на сервере, как и раньше, используется React). Вероятно, обновленное приложение будет несколько быстрее открываться на «слабых» устройствах, поскольку клиентскому браузеру придется загружать и парсить меньше JavaScript-кода (см. два скриншота ниже).</p>
+          <p>Вот как загружается старый вариант приложения, в котором используется React:</p>
+          <div className={styles.imageContainer}>
+            <img src='/assets/images/react-network.gif' 
+              alt='Старая версия (React)' 
+              className={styles.image}     
+              loading='lazy'     
+            />
+          </div>
+          <p>А вот как загружается новый вариант, в котором на клиенте используется Preact:</p>
+          <div className={styles.imageContainer}>
+            <img src='/assets/images/preact-network.gif' 
+              alt='Новая версия (Preact)' 
+              className={styles.image}     
+              loading='lazy'
+            />
+          </div>
         </div>
       </div>
     </>
