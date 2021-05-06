@@ -23,7 +23,6 @@
 .flexItem {
   margin: 1rem;
 
-  /* width: 100%; */
   width: 40%;
 
   display: flex;
@@ -35,7 +34,6 @@
 .flexItemTitle {
   display: block;
 
-  /* margin-top: 0.5rem; */
   margin: 0.5rem 0 0.3rem 0;
 
   text-align: center;
@@ -46,33 +44,35 @@
   font-size: 1rem;
 }
 
-/* .flexItemTitle:hover {
-  color: blue;
-  text-decoration: underline;
-} */
-
 .imageLink {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  border: 2px solid lightslategray;
+}
+
+.imageLink:hover {
+  border: 2px dotted blue;
+  opacity: 0.8;
+}
+
+.imageLink:focus-within {
+  outline: 0;
+  outline: none;
+  border: 2px dotted blue;
+  opacity: 0.8;
 }
 
 .imageContainer {
   padding: 1rem;
   max-width: 100vw;
 
-  border: 2px solid darkslategray;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.imageContainer:hover {
-  border: 2px dotted blue;
-  opacity: 0.8;
 }
 
 .image {
@@ -129,7 +129,6 @@
 
   .imageContainer {
     padding: 0.5rem;
-    /* margin-bottom: 2.5rem; */
   }
 
   .imageSubstitute {

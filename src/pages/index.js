@@ -43,10 +43,9 @@ export default function Home(props) {
               <Link href={ `/projects/${item.id}` } target="_blank">
                 <a 
                   className={styles.imageLink}
+                  tabIndex="0"
                 >
-                  <div className={styles.imageContainer}
-                    tabIndex="0"
-                  >
+                  <div className={styles.imageContainer}>
                     { isNotEmptyString(item.src)
                       ? <img src={item.src} alt={item.title} 
                           width={item.width} height={item.height} 
