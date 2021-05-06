@@ -28,9 +28,14 @@ a {
   word-break: break-all;
 }
 
-.external_link:hover {
+.external_link:hover,
+.external_link:focus {
   text-decoration: underline;
   color: blue;
+}
+
+.external_link:focus {
+  outline: none;
 }
 
 .current_link {
