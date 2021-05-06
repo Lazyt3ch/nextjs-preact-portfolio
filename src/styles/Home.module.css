@@ -76,8 +76,8 @@
 }
 
 .image {
-  max-width: 100%;
-  height: auto;
+  max-width: 100% !important;
+  height: auto !important;
   /* aspect-ratio: attr(width) / attr(height); */
 }
 
