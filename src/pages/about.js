@@ -25,7 +25,9 @@ export default function About() {
             <img src='/assets/images/react-network.gif' 
               alt='Старая версия (React)' 
               className={styles.image}     
-              loading='lazy'     
+              loading='lazy'    
+              width='726' 
+              height='297'
             />
           </div>
           <p>А вот процесс загрузки нового варианта, в котором на клиенте используется Preact:</p>
@@ -34,6 +36,8 @@ export default function About() {
               alt='Новая версия (Preact)' 
               className={styles.image}     
               loading='lazy'
+              width='728' 
+              height='298'
             />
           </div>
           <p>Перевести клиентскую часть приложения с React на Preact оказалось очень просто. Сначала я установил свежую версию Preact (которая, в отличие от более ранних версий, содержит в себе модуль <a href="https://github.com/preactjs/preact-compat" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">preact-compat</a>, так что мне не понадобилось отдельно его устанавливать). Далее я внес изменения в файл next.config.js, опираясь на статьи <a href="https://dev.to/dlw/next-js-replace-react-with-preact-2i72" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Next.js: Replace React with Preact</a> и <a href="https://vercel.com/blog/10-next-js-tips-you-might-not-know" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">10 Next.js Tips You Might Not Know</a>. И всё, приложение запустилось без ошибок с первой попытки!</p>
