@@ -22,7 +22,7 @@ export default function Project({info}) {
   const { id } = router.query;
 
   const { title, description, images } = info;
-  
+ 
   return (
     <>
       <Head>

@@ -16,6 +16,8 @@ const baseUrl = "https://freelance.habr.com";
 export default function Home(props) {
   const { items } = props;
 
+  const maxImageWidth = items.reduce( (acc, item) => Math.max(acc, item.width), 0 );
+
   return (
     <>
       <Head>
@@ -34,7 +36,13 @@ export default function Home(props) {
           </a>
       </h1>
 
-      <div className={styles.projectsContainer}>
+      <div className={styles.projectsContainer}
+        // style={ 
+        //   items.length < 2 
+        //     ? null 
+        //     : {maxWidth: `${(2 * (maxImageWidth + (2 * 16)) + 200)}px`} 
+        // }
+      >
         { isNotEmptyArray(items)
           ? items.map((item, idx) =>
             <div className={styles.flexItem}
