@@ -45,6 +45,7 @@ export default function Home(props) {
                   className={styles.imageLink}
                 >
                   <div className={styles.imageContainer}
+                    tabIndex="0"
                   >
                     { isNotEmptyString(item.src)
                       ? <img src={item.src} alt={item.title} 
