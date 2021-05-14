@@ -66,6 +66,10 @@
 
     padding: 0.6rem 0.6rem 1.2rem;
   }
+
+  .imageTitle {
+    font-size: .8rem;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -77,5 +81,9 @@
     font-size: 0.8rem;
 
     padding: 0.3rem 0.3rem 0.8rem;
+  }
+
+  .imageTitle {
+    font-size: .7rem;
   }
 }
