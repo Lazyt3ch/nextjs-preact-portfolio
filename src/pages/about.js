@@ -21,7 +21,7 @@ export default function About() {
           <p>Отдельные страницы (например, данная страница) создаются на сервере не при каждом запросе, а лишь однократно («статическая генерация»), что позволяет снизить нагрузку на сервер.</p>
           <p><a href="https://nextjs-lazytech-portfolio-20210420-2.netlify.app" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Первоначальный вариант</a> проекта был реализован на фреймворке Next.js «из коробки», то есть как на сервере, так и на клиенте использовалась библиотека React. Однако эта библиотека достаточно «тяжелая» для столь простого веб-приложения, поэтому в данном варианте проекта на клиенте вместо нее используется ее более «легкий» аналог <a href="https://reactjs.org/" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Preact</a> (для серверного рендеринга, как и раньше, используется React). Новый вариант особенно хорошо подходит для «слабых» клиентских устройств, поскольку клиентский браузер загружает и парсит меньше JavaScript-кода (см. два скриншота ниже).</p>
           <p>Вот как загружается старый вариант приложения, в котором везде используется React:</p>
-          <div className={styles.imageContainer}>
+          <figure className={styles.imageContainer}>
             <img src='/assets/images/react-network.gif' 
               alt='Старая версия (React)' 
               className={styles.image}     
@@ -29,9 +29,9 @@ export default function About() {
               width='726' 
               height='297'
             />
-          </div>
+          </figure>
           <p>А вот процесс загрузки нового варианта, в котором на клиенте используется Preact:</p>
-          <div className={styles.imageContainer}>
+          <figure className={styles.imageContainer}>
             <img src='/assets/images/preact-network.gif' 
               alt='Новая версия (Preact)' 
               className={styles.image}     
@@ -39,7 +39,7 @@ export default function About() {
               width='728' 
               height='298'
             />
-          </div>
+          </figure>
           <p>Перевести клиентскую часть приложения с React на Preact оказалось очень просто. Сначала я установил свежую версию Preact (которая, в отличие от более ранних версий, содержит в себе модуль <a href="https://github.com/preactjs/preact-compat" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">preact-compat</a>, так что мне не понадобилось отдельно его устанавливать). Далее я внес изменения в файл next.config.js, опираясь на статьи <a href="https://dev.to/dlw/next-js-replace-react-with-preact-2i72" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">Next.js: Replace React with Preact</a> и <a href="https://vercel.com/blog/10-next-js-tips-you-might-not-know" className="external_link" style={{ wordBreak: 'normal' }} target="_blank" rel="noopener">10 Next.js Tips You Might Not Know</a>. И всё, приложение запустилось без ошибок с первой попытки!</p>
         </div>
       </div>
