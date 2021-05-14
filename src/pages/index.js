@@ -47,10 +47,19 @@ export default function Home(props) {
                 >
                   <div className={styles.imageContainer}>
                     { isNotEmptyString(item.src)
-                      ? <img src={item.src} alt={item.title} 
-                          width={item.width} height={item.height} 
-                          className={styles.image}
-                        />
+                      ? <figure>
+                          <img src={item.src} alt={item.title} 
+                            width={item.width} height={item.height} 
+                            className={styles.image}
+                          />
+                          <figcaption className={styles.flexItemTitle}>
+                            {
+                              isNotEmptyString(item.title) 
+                              ? item.title 
+                              : "Название проекта не найдено :("
+                            }
+                          </figcaption>
+                        </figure>
                       : <div className={styles.imageSubstitute} >
                           Без обложки
                         </div>
@@ -58,14 +67,16 @@ export default function Home(props) {
                   </div>
                 </a>
               </Link>
-              <h2 className={styles.flexItemTitle}>{
-                isNotEmptyString(item.title) 
-                  ? item.title 
-                  : "Project title not found :("
-              }</h2>
+              { !isNotEmptyString(item.src) &&
+                <h2 className={styles.flexItemTitle}>{
+                  isNotEmptyString(item.title) 
+                    ? item.title 
+                    : "Название проекта не найдено :("
+                }</h2>
+              }              
             </div>
             )
-          : <div>"No projects found :("</div>
+          : <div>Проектов не найдено :(</div>
         }
       </div>
     </>
