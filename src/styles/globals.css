@@ -31,7 +31,7 @@ a {
 .external_link:hover,
 .external_link:focus {
   text-decoration: underline;
-  color: blue;
+  color: navy;
 }
 
 .external_link:focus {
