@@ -67,14 +67,14 @@ export default function Project({info}) {
 
         { images && isNotEmptyArray(images) && 
           images.map(({src, width, height}, idx) => 
-            <div className={styles.imageContainer} key={idx}>
+            <figure className={styles.imageContainer} key={idx}>
               <img src={src} 
                 alt={`Иллюстрация ${idx + 1}`} 
                 className={styles.image}
                 width={width} height={height}
                 loading={idx > 0 ? "lazy" : "eager"}
               />
-            </div>
+            </figure>
           )
         }
 
